@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة التسوق - حلويات فاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #744b2b; /* بني شوكولاتة */
+            --accent-color: #e67e22; /* برتقالي كراميل */
+            --glass-white: rgba(255, 255, 255, 0.75);
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* خلفية ناعمة توحي بأجواء المخابز والحلويات */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* حاوية المنتجات العمودية */
+        .cart-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* كارت المنتج الشفاف والعمودي */
+        .cart-item {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 25px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column; /* جعل العناصر عمودية */
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .cart-item img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .item-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        /* أزرار التحكم بالكمية */
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+        }
+
+        .qty-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover { background: var(--accent-color); }
+
+        .qty-number { font-weight: bold; font-size: 1.2rem; min-width: 25px; }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #c0392b;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+        }
+
+        /* الفاتورة والدفع في الأسفل */
+        .checkout-container {
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .pay-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pay-btn:hover {
+            background: white;
+            color: var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        /* فوتر بسيط */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2><i class="fas fa-shopping-basket"></i> سلتك الشهية</h2>
+
+    <div class="cart-list" id="cartItems">
+        
+        <div class="cart-item" data-price="85">
+            <img src="https://images.unsplash.com/photo-1578985543217-07f26a2d1e4c?auto=format&fit=crop&w=300" alt="كيك">
+            <div class="item-info">
+                <h3>كيكة الشوكولاتة</h3>
+            </div>
+            <div class="item-price"><span class="price-val">85</span> ر.س</div>
+            <div class="qty-controls">
+                <button class="qty-btn plus">+</button>
+                <span class="qty-number">1</span>
+                <button class="qty-btn minus">-</button>
+            </div>
+            <button class="delete-btn"><i class="fas fa-trash"></i> حذف المنتج</button>
+        </div>
+
+        <div class="cart-item" data-price="12">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300" alt="كوكيز">
+            <div class="item-info">
+                <h3>كوكيز كلاسيك</h3>
+            </div>
+            <div class="item-price"><span class="price-val">12</span> ر.س</div>
+            <div class="qty-controls">
+                <button class="qty-btn plus">+</button>
+                <span class="qty-number">1</span>
+                <button class="qty-btn minus">-</button>
+            </div>
+            <button class="delete-btn"><i class="fas fa-trash"></i> حذف المنتج</button>
+        </div>
+
+    </div>
+
+    <div class="checkout-container">
+        <div class="total-section">
+            <span>المجموع النهائي:</span>
+            <span class="total-amount" id="finalTotal">97 ر.س</span>
+        </div>
+        <button class="pay-btn">إتمام الطلب والدفع</button>
+    </div>
+
+    <footer class="footer">
+        <p>حلويات السعادة © 2026</p>
+        <p><i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-apple-pay"></i></p>
+    </footer>
+</div>
+
+<script>
+    const cartContainer = document.getElementById('cartItems');
+    const finalTotalDisplay = document.getElementById('finalTotal');
+
+    function updateCalculations() {
+        let grandTotal = 0;
+        const items = document.querySelectorAll('.cart-item');
+        
+        items.forEach(item => {
+            const unitPrice = parseFloat(item.getAttribute('data-price'));
+            const qty = parseInt(item.querySelector('.qty-number').innerText);
+            const itemTotalPrice = unitPrice * qty;
+            
+            // تحديث السعر الفردي المعروض للمنتج
+            item.querySelector('.price-val').innerText = itemTotalPrice;
+            grandTotal += itemTotalPrice;
+        });
+
+        finalTotalDisplay.innerText = grandTotal + ' ر.س';
+    }
+
+    cartContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const itemCard = target.closest('.cart-item');
+        if (!itemCard) return;
+
+        const qtyDisplay = itemCard.querySelector('.qty-number');
+        let currentQty = parseInt(qtyDisplay.innerText);
+
+        // زيادة الكمية
+        if (target.classList.contains('plus')) {
+            qtyDisplay.innerText = currentQty + 1;
+        } 
+        // نقص الكمية
+        else if (target.classList.contains('minus')) {
+            if (currentQty > 1) {
+                qtyDisplay.innerText = currentQty - 1;
+            }
+        } 
+        // حذف المنتج
+        else if (target.closest('.delete-btn')) {
+            itemCard.style.opacity = '0';
+            itemCard.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                itemCard.remove();
+                updateCalculations();
+            }, 300);
+        }
+
+        updateCalculations();
+    });
+
+    // تشغيل الحساب عند التحميل
+    updateCalculations();
+</script>
+
+</body>
+</html>

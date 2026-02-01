@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حلويات</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header id="header">
+      <nav class="navbar">
+        <ul class="nav-list">
+          <li><a href="#">الرئيسية</a></li>
+          <li>
+            <a class="category" href="#">الأصناف</a>
+            <div class="select">
+              <a class="option" href="#">الكل</a>
+              <a class="option" href="#">تقليدية</a>
+              <a class="option" href="#">عصرية</a>
+            </div>
+          </li>
+          <li><a href="#footer">للتواصل</a></li>
+        </ul>
+
+        <div class="nav-icon">
+          <i class="fas fa-shopping-basket"><span class="cart-span">0</span></i>
+        </div>
+      </nav>
+    </header>
+
+    <div class="main">
+      <div class="container" id="product">
+        <div class="title">
+          <h2>مرحبا بكم في موقعنا</h2>
+          <h3>الجودة والسعر</h3>
+        </div>
+
+        <div class="products-grid"></div>
+      </div>
+    </div>
+
+    <div class="cart-section">
+      <i
+        onclick="cartExit()"
+        class="fa-solid fa-arrow-right-from-bracket exist-cart"
+      ></i>
+      <div class="cart"></div>
+    </div>
+
+    <div class="checkOut">
+      <i
+        onclick="checkOutClose()"
+        class="fa-solid fa-arrow-right-from-bracket exist-cart"
+      ></i>
+      <div class="container">
+        <form
+          action="https://script.google.com/macros/s/AKfycbz4kw6B4ufcCDLi1Ht5zNMkgxV3bf6IFDnt4F2RuAwI-TUWZtxnmRBvQ925dmBxe4A6xg/exec"
+          method="post"
+        >
+          <div class="fName">
+            <label for="fName">الإسم</label>
+            <input  name="الإسم" type="text"  id="fName" required />
+          </div>
+
+          <div class="lName">
+            <label for="lName">اللقب</label>
+            <input  name="اللقب" type="text"  id="lName" required/>
+          </div>
+
+          <div class="phone">
+            <label for="phone">رقم الهاتف</label>
+            <input
+              name="الهاتف"
+              type="tel"
+              id="phone"
+              pattern="0[0-9]{9}"
+              required
+            />
+          </div>
+
+          <div class="localisation">
+            <select  name="الولاية" id="wilaya" required>
+              <option  value="non" hidden>إختر الولاية</option>
+            </select>
+
+            <select name="البلدية" id="commune" required>
+              <option value="none" hidden>إختر البلدية</option>
+            </select>
+          </div>
+
+          <div class="formBtn">
+            <button type="submit" id="submit">تأكيد الطلب</button
+            ><button type="button" onclick="checkOutClose()">
+              العودة للمزيد
+            </button>
+          </div>
+
+          <input name="الطلب" type="hidden" id="productInfo" />
+        </form>
+      </div>
+    </div>
+
+    <div class="OrderDone">
+         <div class="DoneContiner">
+          <i class="fa-regular fa-circle-check"></i>
+          <h3>تم تسجيل طلبك بنجاح</h3>
+         </div>
+    </div>
+
+     <div class="OrderFailed">
+         <div class="FailedContiner">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h3>أدخل الولاية/البلدية</h3>
+         </div>
+    </div>
+
+    <footer class="footer" id="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h4>حلويات نجمة</h4>
+          <p>حسابات التواصل</p>
+          <div class="social-links" style="margin-top: 15px">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>روابط تهمك</h4>
+          <ul>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#product">قائمة الحلويات</a></li>
+            <li><a href="#">طلبات المناسبات</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>تواصل معنا</h4>
+          <ul>
+            <li>
+              <i class="fa-solid fa-location-dot"></i> الجزائر
+              العاصمة,براقي,شارع 5
+            </li>
+            <li><i class="fa-solid fa-phone"></i> 550593849 213+</li>
+            <li><i class="fa-solid fa-envelope"></i> nedjma@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>جميع الحقوق محفوظة &copy; 2026 | حلويات نجمة</p>
+      </div>
+    </footer>
+
+    <a class="scrollup" href="#header">⬆</a>
+  </body>
+
+  <script src="products.js"></script>
+  <script src="product-in-cart.js"></script>
+  <script src="nav.js"></script>
+  <script src="checkOut.js"></script>
+</html>
