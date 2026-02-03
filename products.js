@@ -1,7 +1,9 @@
+
 // upload products from data base
 fetch("https://cooking-website-production.up.railway.app/products")
 .then(response=>response.json())
 .then(data=>{
+    let total=0;
     const continer_of_products=document.querySelector(".products-grid")
     data.forEach(product => {
         continer_of_products.innerHTML+=`<div class="product-card">
@@ -26,5 +28,8 @@ fetch("https://cooking-website-production.up.railway.app/products")
             </button>
           </div>
       </div>`
+      total++;
     });
+    totalProductCard=document.querySelector(".total-product-card");
+    totalProductCard.innerHTML=total;
 })

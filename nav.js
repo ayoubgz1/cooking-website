@@ -50,3 +50,17 @@ function cartExit(){
     document.body.classList.remove("overflow")
 }
 
+
+// show card
+window.addEventListener("load",()=>{
+ const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("show-card");
+    }, index * 300); // 0.2s entre les cart   
+  });
+})
+ 
+
+
+
