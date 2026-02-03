@@ -829,7 +829,7 @@ transition: 0.3s ease-in-out;
   color: var(--primary-color);
   font-size: 15px;
 }
-.card:hover{
+.card:hover,.card:focus{
   scale: 1.1;
 }
 
@@ -922,4 +922,5 @@ font-size: 15px;
 .product-price p{
   flex-direction: column;
 }
+
 }
