@@ -23,6 +23,21 @@ Alloption.forEach(option=>{
       }
    })
 })
+//title animation
+const title="حلاوتنا من القلب للقلب";
+let index=0;
+let speed=100;//100ms
+const h3=document.querySelector("#title");
+
+function printTitle(){
+if(index<title.length){
+   h3.textContent+=title[index];
+   index++;
+   setTimeout(printTitle,speed)
+}}
+
+printTitle();
+
 
 // scroll up button 
 const scrollup=document.querySelector(".scrollup");
